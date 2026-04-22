@@ -1,0 +1,65 @@
+// Version: 1.0.0
+type AutoFeatures__384119305 =
+  {
+    avgAmount : Float;
+    prevLocation : Text;
+    timeSinceLast : Int;
+    txCount24h : Nat
+  };
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type DeviceType__54310817 = {#Android; #Desktop; #iOS};
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type MerchantCategory__901804190 =
+  {#Bills; #Food; #Others; #Shopping; #Travel};
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type Timestamp__301639476 = Int;
+type TransactionMode__508648616 = {#ATM; #Mobile; #POS; #Web};
+type TransactionType__884550096 =
+  {#OnlinePurchase; #Payment; #Transfer; #Withdrawal};
+type Transaction__743722140 =
+  {
+    amount : Float;
+    autoFeatures : AutoFeatures__384119305;
+    confidence : Float;
+    deviceType : DeviceType__54310817;
+    fraudReasons : [Text];
+    id : Text;
+    isFraud : Bool;
+    location : Text;
+    merchantCategory : MerchantCategory__901804190;
+    riskScore : Float;
+    timestamp : Timestamp__301639476;
+    transactionMode : TransactionMode__508648616;
+    transactionType : TransactionType__884550096;
+    userId : UserId__158757552
+  };
+type UserBehaviorProfile__96410339 =
+  {
+    activeHours : [Nat];
+    avgSpending : Float;
+    commonLocations : [Text];
+    maxSpending : Float;
+    totalTransactions : Nat;
+    userId : UserId__158757552
+  };
+type UserId__158757552 = Principal;
+actor {
+  stable profiles :
+    {
+      var root :
+        Node__46230540<UserId__158757552, UserBehaviorProfile__96410339>;
+      var size : Nat__490723111
+    };
+  stable transactions :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Transaction__743722140]];
+      var elementIndex : Nat__490723111
+    }
+};

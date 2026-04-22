@@ -1,0 +1,23 @@
+{
+  "overview": "A production-grade AI-powered fraud detection platform that analyzes banking transactions in real time using weighted ML scoring. Users submit transaction details and instantly receive a fraud risk score, confidence level, and explainable AI reasons. The system tracks all transactions per user, provides a visual dashboard with charts, and includes a model performance analytics page.",
+  "features": [
+    "Real-time transaction fraud checker with risk score and confidence level",
+    "Explainable AI showing top reasons for fraud detection (unusual amount, new location, off-hours)",
+    "Fraud Risk Dashboard with bar and pie charts",
+    "Transaction history table with filters and sorting",
+    "Model performance page with accuracy, precision, recall, F1, and confusion matrix",
+    "Internet Identity login with per-user transaction isolation",
+    "Weighted ML scoring engine (amount 30%, location 25%, time 15%, frequency 20%, device 10%)"
+  ],
+  "category": "finance-ai",
+  "tags": [
+    "fraud-detection",
+    "machine-learning",
+    "fintech",
+    "dashboard",
+    "explainable-ai",
+    "banking",
+    "security"
+  ],
+  "last_updated": "2026-04-16T09:30:21.291Z"
+}

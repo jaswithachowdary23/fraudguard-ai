@@ -1,0 +1,101 @@
+type UserId = principal;
+type UserBehaviorProfile = 
+ record {
+   activeHours: vec nat;
+   avgSpending: float64;
+   commonLocations: vec text;
+   maxSpending: float64;
+   totalTransactions: nat;
+   userId: UserId;
+ };
+type TransactionType = 
+ variant {
+   OnlinePurchase;
+   Payment;
+   Transfer;
+   Withdrawal;
+ };
+type TransactionMode = 
+ variant {
+   ATM;
+   Mobile;
+   POS;
+   Web;
+ };
+type Transaction = 
+ record {
+   amount: float64;
+   autoFeatures: AutoFeatures;
+   confidence: float64;
+   deviceType: DeviceType;
+   fraudReasons: vec text;
+   id: text;
+   isFraud: bool;
+   location: text;
+   merchantCategory: MerchantCategory;
+   riskScore: float64;
+   timestamp: Timestamp;
+   transactionMode: TransactionMode;
+   transactionType: TransactionType;
+   userId: UserId;
+ };
+type Timestamp = int;
+type ModelMetrics = 
+ record {
+   accuracy: float64;
+   f1Score: float64;
+   falseNegatives: nat;
+   falsePositives: nat;
+   fraudCount: nat;
+   precision: float64;
+   recall: float64;
+   safeCount: nat;
+   totalTransactions: nat;
+   trueNegatives: nat;
+   truePositives: nat;
+ };
+type MerchantCategory = 
+ variant {
+   Bills;
+   Food;
+   Others;
+   Shopping;
+   Travel;
+ };
+type DeviceType = 
+ variant {
+   Android;
+   Desktop;
+   iOS;
+ };
+type DashboardStats = 
+ record {
+   fraudCount: nat;
+   fraudPercentage: float64;
+   recentTransactions: vec Transaction;
+   safeCount: nat;
+   totalTransactions: nat;
+ };
+type CheckTransactionRequest = 
+ record {
+   amount: float64;
+   deviceType: DeviceType;
+   location: text;
+   merchantCategory: MerchantCategory;
+   transactionMode: TransactionMode;
+   transactionType: TransactionType;
+ };
+type AutoFeatures = 
+ record {
+   avgAmount: float64;
+   prevLocation: text;
+   timeSinceLast: int;
+   txCount24h: nat;
+ };
+service : {
+  checkTransaction: (req: CheckTransactionRequest) -> (Transaction);
+  getDashboardStats: () -> (DashboardStats) query;
+  getModelMetrics: () -> (ModelMetrics) query;
+  getMyBehaviorProfile: () -> (opt UserBehaviorProfile) query;
+  getMyTransactions: () -> (vec Transaction) query;
+}
